@@ -1,0 +1,164 @@
+<view class="base-table-content {{ showSummary ? 'showSummary' : '' }}">
+	<scroll-view
+        class="base-table"
+        scroll-x="{{true}}"
+        scroll-left="{{ tableDrawOption.defaultScrollLeft + 'px' }}"
+        style="{{ scroll.x ? 'width: 100%' : '' }}"
+        enhanced="{{true}}"
+        bindscroll="bindTablescroll"
+	>
+		<view style="height:100%;">
+			<view class="table-thead">
+				<view class="tr" style="{{ tableDrawOption.width ? 'width: ' + tableDrawOption.width + 'px;' : '' }}">
+					<view class="th tr-before" style="width: {{ tableDrawOption.leftWidth }}px;" />
+					<view
+                        class="th{{ col.align ? (' align-' + col.align) : ''}}"
+                        wx:for="{{ curColumns }}"
+                        wx:for-item="col"
+                        wx:key="index"
+                        style="{{ col.width ? 'width: ' + col.width + 'px;' : '' }}"
+                        data-item="{{ col }}"
+                        data-columnKey="curColumns"
+                        bind:tap="theadClick"
+					>
+                        <thHeader wx:if="{{ col.showHeaderSlot }}" col="{{ col }}" />
+                        <view wx:else class="th-title {{ col.sorted ? 'th-text-sorted' : '' }}">
+                            <text class="th-text-text">{{ col.title }}</text>
+                            <view class="th-sorted" wx:if="{{ col.sorted }}">
+                                <text class="iconfont icon-sorted_up {{ col.sortType == 'descend' }}"></text>
+                                <text class="iconfont icon-sorted_down {{ col.sortType == 'ascend' }}"></text>
+                            </view>
+                        </view>
+					</view>
+					<view class="th tr-after" style="width: {{ tableDrawOption.rightWidth }}px;" />
+				</view>
+			</view>
+			<scroll-view
+                class="table-tbdoy"
+                scroll-y="{{true}}"
+                enhanced="{{true}}"
+                bindscroll="bindBodyscroll"
+                style="{{ scroll.y ? 'height: ' + scroll.y + 'px;' : '' }}{{ tableDrawOption.width ? 'width: ' + tableDrawOption.width + 'px;' : '' }}"
+			>
+				<view
+                    class="tr {{ (index + 1) % 2 == 0 ? 'tr-double' : '' }}"
+                    wx:for="{{ curDataSource }}"
+                    wx:key="index"
+                    style="{{ tableDrawOption.width ? 'width: ' + tableDrawOption.width + 'px;' : '' }}"
+				>
+					<view class="td tr-before" style="width: {{ tableDrawOption.leftWidth }}px;" />
+					<view
+                        class="td{{ col.align ? (' align-' + col.align) : ''}}{{ col.sorted ? ' td-sorted' : '' }}"
+                        wx:for="{{ curColumns }}"
+                        wx:for-item="col"
+                        wx:for-index="dataIndex"
+                        wx:key="dataIndex"
+                        style="{{ col.width ? 'width: ' + col.width + 'px' : '' }}"
+					>
+                        <tdBody wx:if="{{ col.showBodySlot }}" item="{{ item }}" col="{{ col }}" index="{{ index }}" bindclick="bodyClick"></tdBody>
+                        <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ item[col.dataIndex] == undefined ? '' : item[col.dataIndex] }}</text>
+					</view>
+					<view class="td tr-after" style="width: {{ tableDrawOption.rightWidth }}px;" />
+				</view>
+			</scroll-view>
+		</view>
+	</scroll-view>
+	<view
+        class="base-table-fixed {{ tableDrawOption.scrollLeft > 0 ? 'is-showShadow' : '' }}"
+        wx:for="{{ fixColumns }}"
+        wx:for-item="fixCol"
+        wx:key="index"
+	>
+		<view class="table-thead">
+			<view class="tr" style="{{ 'width: ' + fixCol.width + 'px;' }}">
+				<view
+                    class="th{{ col.align ? ('align-' + col.align) : ''}}"
+                    wx:for="{{ fixCol.columns }}"
+                    wx:for-item="col"
+                    wx:key="dataIndex"
+                    style="{{ 'width: ' + col.width + 'px' }}"
+                    data-item="{{ col }}"
+                    data-columnKey="fixColumns"
+                    bind:tap="theadClick"
+				>
+                    <thHeader wx:if="{{ col.showHeaderSlot }}" col="{{ col }}" />
+                    <view wx:else class="th-title {{ col.sorted ? 'th-text-sorted' : '' }}">
+                        <text class="th-text-text">{{ col.title }}</text>
+                        <view class="th-sorted" wx:if="{{ col.sorted }}">
+                            <text class="iconfont icon-sorted_up {{ col.sortType == 'descend' }}"></text>
+                            <text class="iconfont icon-sorted_down {{ col.sortType == 'ascend' }}"></text>
+                        </view>
+                    </view>
+				</view>
+			</view>
+		</view>
+		<scroll-view
+            class="table-tbdoy"
+            scroll-y="{{false}}"
+            scroll-top="{{ tableDrawOption.scrollBodyTop }}"
+            bindscroll="bindBodyscroll"
+            style=" top:-{{ tableDrawOption.scrollBodyTop }}px; {{ scroll.y ? 'height: ' + scroll.y + 'px;' : '' }}{{ 'width: ' + fixCol.width + 'px;' }}"
+		>
+			<view
+                class="tr {{ (index + 1) % 2 == 0 ? 'tr-double' : '' }}"
+                wx:for="{{ curDataSource }}"
+                wx:key="index"
+                style="{{ 'width: ' + fixCol.width + 'px;' }}"
+			>
+				<view
+                    class="td{{ col.align ? (' align-' + col.align) : ''}}{{ col.sorted ? ' td-sorted' : '' }}"
+                    wx:for="{{ fixCol.columns }}"
+                    wx:for-item="col"
+                    wx:for-index="dataIndex"
+                    wx:key="dataIndex"
+                    style="{{ col.width ? 'width: ' + col.width + 'px' : '' }}"
+				>
+                    <tdBody wx:if="{{ col.showBodySlot }}" item="{{ item }}" col="{{ col }}" index="{{ index }}" bindclick="bodyClick"></tdBody>
+                    <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ item[col.dataIndex] == undefined ? '' : item[col.dataIndex] }}</text>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>
+<!-- 合计 -->
+<view class="base-table-summary" wx:if="{{ showSummary && curDataSource.length > 0 }}">
+    <view class="base-table">
+		<view class="table-tbdoy">
+			<!-- <view class="tr" style="{{{ width: tableDrawOption.width ? `${tableDrawOption.width}px`: '', left: `-${tableDrawOption.scrollLeft}px`, position: 'relative' }}}" > -->
+			<view class="tr" style="width:{{ tableDrawOption.width }}px;left:-{{ tableDrawOption.scrollLeft }}px;position:relative;" >
+                <view class="td tr-before" style="width: {{ tableDrawOption.leftWidth }}px;" />
+					<view
+                        class="td{{ col.align ? (' align-' + col.align) : ''}}{{ col.sorted ? ' td-sorted' : '' }}"
+                        wx:for="{{ curColumns }}"
+                        wx:for-item="col"
+                        wx:key="dataIndex"
+                        style="{{ col.width ? 'width: ' + col.width + 'px' : '' }}"
+					>
+                        <tdBody wx:if="{{ col.showBodySlot }}" item="{{ item }}" col="{{ col }}" index="{{ index }}" bindclick="bodyClick"></tdBody>
+                        <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ summaryData[col.dataIndex] == undefined ? '123' : summaryData[col.dataIndex] }}</text>
+					</view>
+					<view class="td tr-after" style="width: {{ tableDrawOption.rightWidth }}px;" />
+			</view>
+		</view>
+	</view>
+    <view wx:for="{{fixColumns}}" wx:for-item="fixCol" wx:for-index="index" wx:key="index" class="{{('base-table-fixed ' + ( tableDrawOption.scrollLeft > 0 ? 'is-showShadow' : '' ))}}">
+		<view
+			class="table-tbdoy"
+			onScroll="bindBodyscroll"
+			style="{{( 'width: ' + fixCol.width + 'px;' )}}"
+		>
+			<view class="tr" style="width:{{ fixCol.width  }}px;"> 
+				<view
+					wx:for="{{fixCol.columns}}"
+					wx:for-index="index"
+					wx:for-item="col"
+					wx:key="index"
+					class="td align-{{ col.align }}{{ col.sorted ? ' td-sorted' : '' }}"
+					style="width:{{ col.width }}px;"
+				>
+					<text class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ summaryData[col.dataIndex] || '' }}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

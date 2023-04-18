@@ -1,0 +1,5 @@
+<!--pages/subPackages/home/empPerformance/tdBody/tdBody.wxml-->
+<view class="customeName-body" catch:tap="toDetail">
+    <view class="name">{{ item.memberName }}</view>
+    <view class="iconfont icon-arrow-right"></view>
+</view>

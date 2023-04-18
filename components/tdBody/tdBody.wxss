@@ -1,0 +1,15 @@
+.customeName-body {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.customeName-body .name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.customeName-body .iconfont {
+  color: #BFBFBF;
+  font-size: 40rpx;
+}

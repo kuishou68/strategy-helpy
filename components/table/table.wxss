@@ -1,0 +1,172 @@
+.base-table-content.showSummary {
+  height: calc(100% - 90rpx);
+}
+.base-table-content {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.base-table-summary {
+  box-shadow: 4rpx -6px 12rpx 0px rgba(0, 0, 0, 0.015);
+  position: relative;
+  overflow: hidden;
+}
+.base-table-summary .base-table .table-tbdoy .tr .td,
+.base-table-summary .base-table-fixed .table-tbdoy .tr .td {
+  font-weight: 600;
+}
+.base-table-summary .base-table .table-tbdoy .td-text.td-ellipsis,
+.base-table-summary .base-table-fixed .table-tbdoy .td-text.td-ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.base-table-summary .base-table-fixed.is-showShadow {
+  box-shadow: 16rpx -4px 8rpx 0px rgba(0, 0, 0, 0.015);
+}
+.base-table,
+.base-table-fixed {
+  height: 100%;
+}
+.base-table .table-thead,
+.base-table-fixed .table-thead,
+.base-table .tr,
+.base-table-fixed .tr {
+  height: 90rpx;
+}
+.base-table .table-tbdoy,
+.base-table-fixed .table-tbdoy {
+  height: calc(100% - 90rpx);
+}
+.base-table .table-thead .tr,
+.base-table-fixed .table-thead .tr,
+.base-table .table-tbdoy .tr,
+.base-table-fixed .table-tbdoy .tr {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.base-table .table-thead .tr.tr-double .td,
+.base-table-fixed .table-thead .tr.tr-double .td,
+.base-table .table-tbdoy .tr.tr-double .td,
+.base-table-fixed .table-tbdoy .tr.tr-double .td {
+  background-color: #F4F4F4;
+}
+.base-table .table-thead .tr .th,
+.base-table-fixed .table-thead .tr .th,
+.base-table .table-tbdoy .tr .th,
+.base-table-fixed .table-tbdoy .tr .th,
+.base-table .table-thead .tr .td,
+.base-table-fixed .table-thead .tr .td,
+.base-table .table-tbdoy .tr .td,
+.base-table-fixed .table-tbdoy .tr .td {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 12rpx 20rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.85);
+}
+.base-table .table-thead .tr .th:nth-last-of-type(2),
+.base-table-fixed .table-thead .tr .th:nth-last-of-type(2),
+.base-table .table-tbdoy .tr .th:nth-last-of-type(2),
+.base-table-fixed .table-tbdoy .tr .th:nth-last-of-type(2),
+.base-table .table-thead .tr .td:nth-last-of-type(2),
+.base-table-fixed .table-thead .tr .td:nth-last-of-type(2),
+.base-table .table-tbdoy .tr .td:nth-last-of-type(2),
+.base-table-fixed .table-tbdoy .tr .td:nth-last-of-type(2) {
+  border-right: none;
+}
+.base-table .table-thead .tr .th .tr-title,
+.base-table-fixed .table-thead .tr .th .tr-title,
+.base-table .table-tbdoy .tr .th .tr-title,
+.base-table-fixed .table-tbdoy .tr .th .tr-title,
+.base-table .table-thead .tr .td .tr-title,
+.base-table-fixed .table-thead .tr .td .tr-title,
+.base-table .table-tbdoy .tr .td .tr-title,
+.base-table-fixed .table-tbdoy .tr .td .tr-title {
+  width: 100%;
+  height: 100%;
+}
+.base-table .table-thead .tr .th.align-right,
+.base-table-fixed .table-thead .tr .th.align-right,
+.base-table .table-tbdoy .tr .th.align-right,
+.base-table-fixed .table-tbdoy .tr .th.align-right,
+.base-table .table-thead .tr .td.align-right,
+.base-table-fixed .table-thead .tr .td.align-right,
+.base-table .table-tbdoy .tr .td.align-right,
+.base-table-fixed .table-tbdoy .tr .td.align-right {
+  justify-content: flex-end;
+}
+.base-table .table-thead .tr .tr-before,
+.base-table-fixed .table-thead .tr .tr-before,
+.base-table .table-tbdoy .tr .tr-before,
+.base-table-fixed .table-tbdoy .tr .tr-before,
+.base-table .table-thead .tr .tr-after,
+.base-table-fixed .table-thead .tr .tr-after,
+.base-table .table-tbdoy .tr .tr-after,
+.base-table-fixed .table-tbdoy .tr .tr-after {
+  border: none;
+  padding: 0;
+}
+.base-table .table-thead .tr .th,
+.base-table-fixed .table-thead .tr .th {
+  background-color: #F8F8F8;
+}
+.base-table .table-thead .tr .th-title.th-text-sorted,
+.base-table-fixed .table-thead .tr .th-title.th-text-sorted {
+  display: flex;
+}
+.base-table .table-thead .tr .th-title.th-text-sorted .th-sorted,
+.base-table-fixed .table-thead .tr .th-title.th-text-sorted .th-sorted {
+  position: relative;
+  margin-left: 10rpx;
+}
+.base-table .table-thead .tr .th-title.th-text-sorted .th-sorted .iconfont,
+.base-table-fixed .table-thead .tr .th-title.th-text-sorted .th-sorted .iconfont {
+  position: absolute;
+  font-size: 16rpx;
+  color: rgba(0, 0, 0, 0.25);
+}
+.base-table .table-thead .tr .th-title.th-text-sorted .th-sorted .icon-sorted_up,
+.base-table-fixed .table-thead .tr .th-title.th-text-sorted .th-sorted .icon-sorted_up {
+  top: 2rpx;
+  left: 0;
+}
+.base-table .table-thead .tr .th-title.th-text-sorted .th-sorted .icon-sorted_up.true,
+.base-table-fixed .table-thead .tr .th-title.th-text-sorted .th-sorted .icon-sorted_up.true {
+  color: #3270FD;
+}
+.base-table .table-thead .tr .th-title.th-text-sorted .th-sorted .icon-sorted_down,
+.base-table-fixed .table-thead .tr .th-title.th-text-sorted .th-sorted .icon-sorted_down {
+  top: 14rpx;
+  left: 0;
+}
+.base-table .table-thead .tr .th-title.th-text-sorted .th-sorted .icon-sorted_down.true,
+.base-table-fixed .table-thead .tr .th-title.th-text-sorted .th-sorted .icon-sorted_down.true {
+  color: #3270FD;
+}
+.base-table .table-tbdoy .tr .td .td-text.td-ellipsis,
+.base-table-fixed .table-tbdoy .tr .td .td-text.td-ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.base-table-fixed {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.base-table-fixed.is-showShadow {
+  box-shadow: 4px 0px 16px 0px rgba(0, 0, 0, 0.05);
+}
+.base-table-fixed .table-thead {
+  position: relative;
+  z-index: 5;
+}
+.base-table-fixed .table-tbdoy {
+  position: relative;
+  height: auto;
+}
