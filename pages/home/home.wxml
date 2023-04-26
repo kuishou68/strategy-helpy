@@ -2,30 +2,35 @@
   <view class="title-wrap">
     <!-- <image class="title-icon" mode="aspectFit" src="/assets/TDesignLogo@2x.png" aria-label="TDesign Logo" /> -->
   </view>
-  <!-- <view class="desc"> postMan 小工具</view> -->
   <view class="view-wrap">
-    <t-cell class="request-method" title="GET" arrow hover note="{{cityText}}" bind:click="onTitlePicker" />
-    <t-input class="input-url" label="" placeholder="请输入URL" size="small">
-      <t-button slot="suffix" theme="primary" size="extra-small"> send </t-button>
+    <t-cell class="request-method" title="{{ requestValue }}" arrow hover note="{{noteText}}" bind:click="onTitlePicker" />
+    <t-input class="input-url" value="{{ requestUrl }}" label="" placeholder="请输入URL" size="small" bindchange="onUrlInput">
+      <t-button slot="suffix" theme="primary" size="extra-small" bind:tap="sendRequest"> send </t-button>
     </t-input>
   </view>
   <view class="view-taber">
-    <t-tabs defaultValue="{{0}}" space-evenly="{{false}}" bind:change="onTabsChange" bind:click="onTabsClick">
-      <t-tab-panel label="Params" value="0" >
-        <!-- Query Params -->
+    <t-tabs defaultValue="params" space-evenly="{{false}}" bind:change="onTabsChange" bind:click="onTabsClick">
+      <t-tab-panel label="Params" value="params" >
         <table
             scroll="{{ scroll }}"
             columns="{{ urlColumns.paramsColumns }}"
-            dataSource="{{ urlForm.paramsList || [] }}"
+            dataSource="{{ urlForm.params || [] }}"
+            generic:tdBody="tdBody"
+            bind:change="onTableChange"
+        >
+        </table>
+      </t-tab-panel>
+      <t-tab-panel label="Header" value="header" >
+        <table
+            scroll="{{ scroll }}"
+            columns="{{ urlColumns.headerColumns }}"
+            dataSource="{{ urlForm.header || [] }}"
             generic:tdBody="tdBody"
         >
         </table>
       </t-tab-panel>
       <t-tab-panel label="Authorization" value="1" >
         Authorization
-      </t-tab-panel>
-      <t-tab-panel label="Header" value="2" >
-        Header
       </t-tab-panel>
       <t-tab-panel label="Body" value="3" />
       <t-tab-panel label="Pre-request Script" value="4" />
@@ -35,8 +40,8 @@
   </view>
 
   <t-picker
-    visible="{{cityVisible}}"
-    value="{{cityValue}}"
+    visible="{{visible}}"
+    value="{{requestValue}}"
     data-key="city"
     title="请求方式"
     cancelBtn="取消"
@@ -45,6 +50,6 @@
     bindpick="onColumnChange"
     bindcancel="onPickerCancel"
   >
-    <t-picker-item options="{{citys}}" />
+    <t-picker-item options="{{requestMethod}}" />
   </t-picker>
 </view>

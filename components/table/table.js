@@ -81,6 +81,12 @@ Component({
             });
             return { momColumns, leftColumns, rightColumns };
         },
+        changeInput(e){
+            let { currentTarget:{dataset:{key, index}}, detail:{value} } = e;
+            this.data.curDataSource[index][key] = value
+            // console.log("curDataSource==>", this.data.curDataSource);
+            this.triggerEvent('change', this.data.curDataSource);
+        },
         processDataSource(dataSource) {
             return dataSource.map(e => {
                 // console.log('e---', e);

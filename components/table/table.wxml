@@ -56,7 +56,8 @@
                         style="{{ col.width ? 'width: ' + col.width + 'px' : '' }}"
 					>
                         <tdBody wx:if="{{ col.showBodySlot }}" item="{{ item }}" col="{{ col }}" index="{{ index }}" bindclick="bodyClick"></tdBody>
-                        <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ item[col.dataIndex] == undefined ? '' : item[col.dataIndex] }}</text>
+                        <input value="{{ item[col.dataIndex] }}" data-index="{{ index }}" data-target="{{ item }}" data-key="{{ col.dataIndex }}" bind:change="changeInput" />
+                        <!-- <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ item[col.dataIndex] == undefined ? '' : item[col.dataIndex] }}</text> -->
 					</view>
 					<view class="td tr-after" style="width: {{ tableDrawOption.rightWidth }}px;" />
 				</view>
@@ -114,7 +115,8 @@
                     style="{{ col.width ? 'width: ' + col.width + 'px' : '' }}"
 				>
                     <tdBody wx:if="{{ col.showBodySlot }}" item="{{ item }}" col="{{ col }}" index="{{ index }}" bindclick="bodyClick"></tdBody>
-                    <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ item[col.dataIndex] == undefined ? '' : item[col.dataIndex] }}</text>
+                    <input value="{{ item[col.dataIndex] }}" />
+                    <!-- <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ item[col.dataIndex] == undefined ? '' : item[col.dataIndex] }}</text> -->
 				</view>
 			</view>
 		</scroll-view>
@@ -135,7 +137,8 @@
                         style="{{ col.width ? 'width: ' + col.width + 'px' : '' }}"
 					>
                         <tdBody wx:if="{{ col.showBodySlot }}" item="{{ item }}" col="{{ col }}" index="{{ index }}" bindclick="bodyClick"></tdBody>
-                        <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ summaryData[col.dataIndex] == undefined ? '123' : summaryData[col.dataIndex] }}</text>
+                        <input value="{{ summaryData[col.dataIndex] }}" />
+                        <!-- <text wx:else class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ summaryData[col.dataIndex] == undefined ? '123' : summaryData[col.dataIndex] }}</text> -->
 					</view>
 					<view class="td tr-after" style="width: {{ tableDrawOption.rightWidth }}px;" />
 			</view>
@@ -147,7 +150,7 @@
 			onScroll="bindBodyscroll"
 			style="{{( 'width: ' + fixCol.width + 'px;' )}}"
 		>
-			<view class="tr" style="width:{{ fixCol.width  }}px;"> 
+			<view class="tr" style="width:{{ fixCol.width  }}px;">
 				<view
 					wx:for="{{fixCol.columns}}"
 					wx:for-index="index"
@@ -156,7 +159,8 @@
 					class="td align-{{ col.align }}{{ col.sorted ? ' td-sorted' : '' }}"
 					style="width:{{ col.width }}px;"
 				>
-					<text class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ summaryData[col.dataIndex] || '' }}</text>
+                <input value="{{ summaryData[col.dataIndex] }}" />
+					<!-- <text class="td-text {{ col.ellipsis ? 'td-ellipsis':'' }}">{{ summaryData[col.dataIndex] || '' }}</text> -->
 				</view>
 			</view>
 		</view>

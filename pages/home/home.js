@@ -1,13 +1,13 @@
 // import list from './data/index';
 Page({
     data: {
-        // list,
-        cityText: '',
-        cityValue: [],
+        noteText: "",
+        requestUrl: "",
+        requestValue: "GET",
         dateText: '',
         dateValue: [],
         scroll: {},
-        citys: [
+        requestMethod: [
             { label: 'GET', value: 'GET' },
             { label: 'POST', value: 'POST' },
             { label: 'PUT', value: 'PUT' },
@@ -15,78 +15,69 @@ Page({
         ],
         urlColumns:{
             paramsColumns: [
-                { title: "key", dataIndex: "key", width: 120, sowBodySlot: true },
-                { title: "value", dataIndex: "value", width: 100, sowBodySlot: true },
-                { title: "description", dataIndex: "description", width: 100, sowBodySlot: true }
+                { title: "key", dataIndex: "key", width: 110, sowBodySlot: true },
+                { title: "value", dataIndex: "value", width: 150, sowBodySlot: true },
+                { title: "description", dataIndex: "description", width: 150, sowBodySlot: true }
             ],
+            headerColumns: [
+                { title: "健", dataIndex: "key", width: 110, sowBodySlot: true },
+                { title: "值", dataIndex: "value", width: 150, sowBodySlot: true },
+                { title: "描述", dataIndex: "description", width: 150, sowBodySlot: true }
+            ]
         },
         urlForm:{
-            paramsList:[
-                {key: "111", value: "222", description: "333"}
+            params:[
+                {key: "", value: "", description: ""},
+                {key: "", value: "", description: ""},
+                {key: "", value: "", description: ""},
+            ],
+            header:[
+                {key: "", value: "", description: ""},
+                {key: "", value: "", description: ""},
+                {key: "", value: "", description: ""},
             ]
         }
 
     },
     onLoad(options) {
-        /* const { path, q } = options;
-        console.log(path);
-        if (q) {
-            const str = this.getQueryByUrl(decodeURIComponent(q));
-            console.log(str, str.page);
-            wx.navigateTo({
-                url: `/pages/${str.page}/${str.page}`,
-            });
-        } */
+    },
+    sendRequest(){
+        let { urlForm, requestValue, requestUrl, currTabPanel} = this.data;
+        console.log(requestValue);
+        console.log(requestUrl);
+        console.log(urlForm[currTabPanel]);
+    },
+    onUrlInput(e){
+        let { detail:{value} } = e;
+        this.setData({
+            requestUrl: value
+        })
+    },
+    /**
+     * 填写表格完成
+     */
+    onTableChange(e){
+        let { detail } = e;
+        let { currTabPanel } = this.data;
+        this.data.urlForm[currTabPanel] = detail;
     },
     onTitlePicker() {
-        this.setData({ cityVisible: true, cityTitle: '请求方式' });
+        this.setData({ visible: true, title: '请求方式' });
+    },
+    onPickerChange(e){
+        let { detail } = e;
+        console.log(detail.value[0]);
+        this.setData({
+            requestValue: detail.value[0]
+        })
     },
     onTabsChange(event) {
       console.log(`Change tab, tab-panel value is ${event.detail.value}.`);
+      this.setData({
+        currTabPanel: event.detail.value
+      })
     },
     onTabsClick(event) {
       console.log(`Click tab, tab-panel value is ${event.detail.value}.`);
-    },
-
-    clickHandle(e) {
-        let { name, path = '' } = e.detail.item;
-        if (!path) {
-            name = name.replace(/^[A-Z]/, (match) => `${match}`.toLocaleLowerCase());
-            name = name.replace(/[A-Z]/g, (match) => {
-                return `-${match.toLowerCase()}`;
-            });
-            path = `/pages/${name}/${name}`;
-        }
-        wx.navigateTo({
-            url: path,
-            fail: () => {
-                wx.navigateTo({
-                    url: '/pages/home/navigateFail/navigateFail',
-                });
-            },
-        });
-    },
-    onShareAppMessage() {
-        return {
-            title: 'TDesign UI',
-            path: '/pages/home/home',
-        };
-    },
-    getQueryByUrl(url) {
-        const data = {};
-        const queryArr = `${url}`.match(/([^=&#?]+)=[^&#]+/g) || [];
-        if (queryArr.length) {
-            queryArr.forEach((para) => {
-                const d = para.split('=');
-                const val = decodeURIComponent(d[1]);
-                if (data[d[0]] !== undefined) {
-                    data[d[0]] += `,${val}`;
-                }
-                else {
-                    data[d[0]] = val;
-                }
-            });
-        }
-        return data;
     },
 });
