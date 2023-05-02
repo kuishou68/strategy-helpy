@@ -1,3 +1,6 @@
+.base-table-content {
+  border: 1rpx solid #999999;
+}
 .base-table-content.showSummary {
   height: calc(100% - 90rpx);
 }

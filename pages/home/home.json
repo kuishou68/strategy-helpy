@@ -6,6 +6,7 @@
     "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
     "table": "../../components/table/table",
     "tdBody": "../../components/tdBody/tdBody",
     "pull-down-list": "../../components/pull-down-list/index"

@@ -2,9 +2,12 @@
   <view class="title-wrap">
     <!-- <image class="title-icon" mode="aspectFit" src="/assets/TDesignLogo@2x.png" aria-label="TDesign Logo" /> -->
   </view>
+  <view class="view-curl">
+    <t-textarea t-class="external-class" value="{{ curlText }}" placeholder="请输入curl" bordered indicator disableDefaultPadding="{{true}}" bind:change="curlChange" />
+  </view>
   <view class="view-wrap">
     <t-cell class="request-method" title="{{ requestValue }}" arrow hover note="{{noteText}}" bind:click="onTitlePicker" />
-    <t-input class="input-url" value="{{ requestUrl }}" label="" placeholder="请输入URL" size="small" bindchange="onUrlInput">
+    <t-input class="input-url" value="{{ requestUrl }}" label="" size="small" bindchange="onUrlInput">
       <t-button slot="suffix" theme="primary" size="extra-small" bind:tap="sendRequest"> send </t-button>
     </t-input>
   </view>
@@ -30,12 +33,39 @@
         </table>
       </t-tab-panel>
       <t-tab-panel label="Authorization" value="1" >
-        Authorization
+        <textarea>
+        </textarea>
       </t-tab-panel>
-      <t-tab-panel label="Body" value="3" />
-      <t-tab-panel label="Pre-request Script" value="4" />
-      <t-tab-panel label="Tests" value="5" />
-      <t-tab-panel label="Settings" value="6" />
+      <t-tab-panel label="Tests" value="3" >
+        <textarea>
+        </textarea>
+      </t-tab-panel>
+      <t-tab-panel label="Pre-request Script" value="4" >
+        <textarea>
+        </textarea>
+      </t-tab-panel>
+      <t-tab-panel label="Body" value="5" >
+        <textarea>
+        </textarea>
+      </t-tab-panel>
+    </t-tabs>
+  </view>
+  <view class="view-response">
+    <t-tabs defaultValue="body" space-evenly="{{false}}" >
+      <t-tab-panel label="Body" value="body" >
+        <textarea>
+          {{ resForm.body }}
+        </textarea>
+      </t-tab-panel>
+      <t-tab-panel label="Header" value="header" >
+        <table
+            scroll="{{ scroll }}"
+            columns="{{ resColumns.header }}"
+            dataSource="{{ resForm.header || [] }}"
+            generic:tdBody="tdBody"
+        >
+        </table>
+      </t-tab-panel>
     </t-tabs>
   </view>
 

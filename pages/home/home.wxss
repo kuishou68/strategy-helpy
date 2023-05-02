@@ -41,3 +41,18 @@ page .main .desc {
   padding-left: 16rpx;
   padding-right: 16rpx;
 }
+page .main .textarea-example {
+  padding: 32rpx 32rpx 48rpx;
+  background-color: #fff;
+}
+page .main .external-class {
+  padding-top: 24rpx !important;
+  padding-bottom: 24rpx !important;
+}
+page .main .textarea-example__label {
+  display: block;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 24rpx;
+  line-height: 40rpx;
+  padding-bottom: 16rpx;
+}
