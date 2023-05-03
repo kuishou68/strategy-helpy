@@ -1,5 +1,5 @@
 const constant = {
-    version: '0.0.1',
+    version: '1.0.0',
 	appId:"wxf2a2fcb6e9b371f4",//策略小帮手appId
 	xsrfHeaderName:"Authorization",
 	product:"strategyHelpy",

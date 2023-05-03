@@ -1,6 +1,5 @@
 <view class="main">
   <view class="title-wrap">
-    <!-- <image class="title-icon" mode="aspectFit" src="/assets/TDesignLogo@2x.png" aria-label="TDesign Logo" /> -->
   </view>
   <view class="view-curl">
     <t-textarea t-class="external-class" value="{{ curlText }}" placeholder="请输入curl" bordered indicator disableDefaultPadding="{{true}}" bind:change="curlChange" />
@@ -13,6 +12,15 @@
   </view>
   <view class="view-taber">
     <t-tabs defaultValue="params" space-evenly="{{false}}" bind:change="onTabsChange" bind:click="onTabsClick">
+      <t-tab-panel label="Header" value="header" >
+        <table
+            scroll="{{ scroll }}"
+            columns="{{ urlColumns.headerColumns }}"
+            dataSource="{{ urlForm.header || [] }}"
+            generic:tdBody="tdBody"
+        >
+        </table>
+      </t-tab-panel>
       <t-tab-panel label="Params" value="params" >
         <table
             scroll="{{ scroll }}"
@@ -20,15 +28,6 @@
             dataSource="{{ urlForm.params || [] }}"
             generic:tdBody="tdBody"
             bind:change="onTableChange"
-        >
-        </table>
-      </t-tab-panel>
-      <t-tab-panel label="Header" value="header" >
-        <table
-            scroll="{{ scroll }}"
-            columns="{{ urlColumns.headerColumns }}"
-            dataSource="{{ urlForm.header || [] }}"
-            generic:tdBody="tdBody"
         >
         </table>
       </t-tab-panel>
