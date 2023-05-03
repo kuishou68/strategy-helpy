@@ -105,7 +105,6 @@ Page({
     let headers = [];
     // let data = "";
     let url = "";
-    debugger;
 
     lines.map((line) => {
       if (regex.test(line)) {
@@ -191,13 +190,8 @@ Page({
    */
   toExportExcel() {
     let { resForm: { body } } = this.data;
-    // console.log(body);
-    // console.log(new Date().format("yyyy-MM-dd HH:mm:ss"));
-
-    // 构建一个表的数据
+    let timestamp = Date.parse(new Date()) / 1000;
     let data = JSON.parse(body);
-
-    // debugger;
     let sheet = [];
     let title = ['trade_type', 'stock_code', 'stock_name', 'cur_price', 'trade_dt', 'trade_status', 'create_time']
     sheet.push(title)
@@ -216,13 +210,13 @@ Page({
     // XLSX插件使用
     let ws = XLSX.utils.aoa_to_sheet(sheet);
     let wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "222");
+    XLSX.utils.book_append_sheet(wb, ws, `${timestamp}`);
     let fileData = XLSX.write(wb, {
       bookType: "xlsx",
       type: "base64",
     });
 
-    let filePath = `${wx.env.USER_DATA_PATH}/222.xlsx`;
+    let filePath = `${wx.env.USER_DATA_PATH}/${timestamp}.xlsx`;
     // let filePath = `111.xlsx`;
     // 写文件
     const fs = wx.getFileSystemManager();
@@ -247,8 +241,7 @@ Page({
             },
           });
         } else {
-          // 手机端导出
-          // 打开文档
+          // 手机端导出 打开文档
           wx.openDocument({
             filePath: filePath,
             success: function (res) {
@@ -270,9 +263,7 @@ Page({
     });
   },
   onUrlInput(e) {
-    let {
-      detail: { value },
-    } = e;
+    let { detail: { value } } = e;
     this.setData({
       requestUrl: value,
     });
@@ -296,9 +287,7 @@ Page({
     });
   },
   onTabsChange(e) {
-    let {
-      detail: { value },
-    } = e;
+    let { detail: { value } } = e;
     this.setData({
       currTabPanel: value,
     });
