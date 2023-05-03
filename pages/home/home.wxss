@@ -31,6 +31,14 @@ page .main .title-icon {
   width: 296rpx;
   height: 80rpx;
 }
+page .main .view-taber .textarea {
+  width: 100%;
+  overflow: scroll;
+}
+page .main .view-response .textarea {
+  width: 100%;
+  overflow: scroll;
+}
 page .main .desc {
   color: rgba(0, 0, 0, 0.4);
   margin-top: 32rpx;
@@ -55,4 +63,24 @@ page .main .textarea-example__label {
   font-size: 24rpx;
   line-height: 40rpx;
   padding-bottom: 16rpx;
+}
+page .main .input-example {
+  --td-input-vertical-padding: 24rpx;
+  background-color: #fff;
+  padding: 32rpx 32rpx 16rpx;
+}
+page .main .input-example .textarea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+page .main .input-example .textarea .t-textarea--border {
+  width: 100%;
+  margin-right: 10rpx;
+}
+page .main .input-example__label {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 24rpx;
+  line-height: 40rpx;
+  margin: 0 8rpx 16rpx;
 }

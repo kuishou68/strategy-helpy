@@ -13,7 +13,7 @@ const METHOD = {
  * @param {*} params
  * @returns
  */
-async function request(url, method, params,header={}) {
+async function request(url, method, params={},header={}) {
     const app = getApp();
     let token = wx.getStorageSync(constant.xsrfHeaderName);
     let tokenHeader = token ? {[constant.xsrfHeaderName]: token} : {};

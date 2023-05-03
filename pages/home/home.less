@@ -29,6 +29,18 @@ page {
             width: 296rpx;
             height: 80rpx;
         }
+        .view-taber{
+            .textarea{
+                width: 100%;
+                overflow: scroll;
+            }
+        }
+        .view-response{
+            .textarea{
+                width: 100%;
+                overflow: scroll;
+            }
+        }
         .desc {
             color: rgba(0, 0, 0, 0.4);
             margin-top: 32rpx;
@@ -53,6 +65,26 @@ page {
           font-size: 24rpx;
           line-height: 40rpx;
           padding-bottom: 16rpx;
+        }
+        .input-example {
+          --td-input-vertical-padding: 24rpx;
+          background-color: #fff;
+          padding: 32rpx 32rpx 16rpx;
+          .textarea{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .t-textarea--border {
+                width: 100%;
+                margin-right: 10rpx;
+            }
+          }
+        }
+        .input-example__label {
+          color: rgba(0, 0, 0, 0.9);
+          font-size: 24rpx;
+          line-height: 40rpx;
+          margin: 0 8rpx 16rpx;
         }
     }
 
