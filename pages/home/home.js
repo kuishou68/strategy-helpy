@@ -94,33 +94,35 @@ Page({
    * 解析curl
    */
   curlChange(e) {
-    let {
-      detail: { value }
-    } = e;
+    let { detail: { value } } = e;
     let curlCmd = value;
     let { urlForm } = this.data;
+    // 1.以换行空格，切割成一个数组
     let lines = curlCmd.split(/\r?\n/);
+    // 2.匹配单引号中间关键信息
     let regex = /'~?.+'/g;
     // let method = "";
     let headers = [];
     // let data = "";
     let url = "";
-
+    // 3.数组的每一项内容都是独立的
     lines.map((line) => {
       if (regex.test(line)) {
+        // 4.去除将单引号，避免干扰后续的提取
         let line_str = line.match(regex)[0].replace(/\'/g, "");
         let headerStr = line_str.split(":", 2);
-        // 带curl的为http .replace(/\'|: /g, ""); .replace(/\'|: /g, "");
+        // 5.带curl的为http 内容;
         if (line.indexOf("curl") !== -1) {
           url = line_str;
         } else if (line.indexOf("data-raw") !== -1) {
+          // 6.带data-raw 暂且设置为post请求方式，其他请求方式一样的提取方式
           urlForm.body = line_str;
           this.setData({
             requestValue: "POST",
             urlForm: urlForm,
           });
         } else if (headerStr) {
-          // 将文本以 ： 分隔成2部分作为键值，同时去除多余 ' :  [0].replace(/\: /g, "")
+          // 7.将文本以 ： 分隔成2部分作为键值，同时去除多余 ' :
           let headerKey = line_str.match(/~?.+: /g)[0].replace(/\: /g, "");
           let headerValue = line_str.match(/: ?.+/g)[0].replace(/\: /g, "");
           headers.push({
@@ -130,7 +132,6 @@ Page({
         }
       }
     });
-    // console.log(headers);
     urlForm.header = headers;
     this.setData({
       requestUrl: url,
