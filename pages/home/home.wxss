@@ -39,6 +39,10 @@ page .main .view-response .textarea {
   width: 100%;
   overflow: scroll;
 }
+page .main .view-response .textarea-input {
+  height: 200rpx;
+  width: 100%;
+}
 page .main .desc {
   color: rgba(0, 0, 0, 0.4);
   margin-top: 32rpx;

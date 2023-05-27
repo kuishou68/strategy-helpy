@@ -38,6 +38,7 @@ Page({
         { key: "", value: "", description: "" },
       ],
       body: undefined,
+      bodyColumns: []
     },
     resColumns: {
       header: [
@@ -179,12 +180,56 @@ Page({
       }
 
       if (data) {
+        let bodyColumns = [];
+        console.log("data==>", data);
+        if(data && data.length > 0){
+          let keys = Object.keys(data[0]);
+          for(let i = 0; i < keys.length; i++){
+            bodyColumns.push({
+                title: keys[i],
+                dataIndex: keys[i],
+                sowBodySlot: true
+            })
+          }
+        }
         resForm.body = JSON.stringify(data);
+        resForm.bodyDataSource = data;
+        resForm.bodyColumns = bodyColumns;
         this.setData({
           resForm: resForm,
         });
       }
     });
+  },
+  /**
+   * 粘贴body内容
+   */
+  changeBodyRes(e){
+    let { detail:{value} } = e;
+    // console.log(value);
+    let { resForm } = this.data;
+    let data = JSON.parse(value);
+    let bodyColumns = [];
+    console.log("data==>", data);
+    // debugger;
+    if(data && data.length > 0){
+      let keys = Object.keys(data[0]);
+      for(let i = 0; i < keys.length; i++){
+        bodyColumns.push({
+            title: keys[i],
+            dataIndex: keys[i],
+            width: 100,
+            sowBodySlot: true
+        })
+      }
+    }
+    console.log("bodyColumns==>", bodyColumns);
+    resForm.body = value;
+    resForm.bodyColumns = bodyColumns;
+    resForm.bodyDataSource = data;
+    this.setData({
+      resForm
+    })
   },
   /**
    * 导出 excel
@@ -194,17 +239,28 @@ Page({
     let timestamp = Date.parse(new Date()) / 1000;
     let data = JSON.parse(body);
     let sheet = [];
-    let title = ['trade_type', 'stock_code', 'stock_name', 'cur_price', 'trade_dt', 'trade_status', 'create_time']
+    let title = [];
+    if(data && data.length > 0){
+      let keys = Object.keys(data[0]);
+      for(let i = 0; i < keys.length; i++){
+        title.push( keys[i] );
+      }
+    }
+    console.log("title==>", title);
+    // ['trade_type', 'stock_code', 'stock_name', 'cur_price', 'trade_dt', 'trade_status', 'create_time']
     sheet.push(title)
     data.forEach(item => {
         let rowcontent = []
-        rowcontent.push(item.trade_type);
+        for(let i = 0; i < title.length; i++){
+          rowcontent.push(item[title[i]]);
+        }
+        /* rowcontent.push(item.trade_type);
         rowcontent.push(item.stock_code);
         rowcontent.push(item.stock_name);
         rowcontent.push(item.cur_price);
         rowcontent.push(item.trade_dt);
         rowcontent.push(item.trade_status);
-        rowcontent.push(item.create_time);
+        rowcontent.push(item.create_time); */
         sheet.push(rowcontent)
     })
     console.log(sheet);

@@ -8,13 +8,6 @@
         <t-textarea t-class="external-class" value="{{ curlText }}" placeholder="请输入curl" bordered indicator disableDefaultPadding="{{true}}" bind:change="curlChange" />
         <t-button size="extra-small" theme="primary" bind:tap="clearCurl">clear</t-button>
       </view>
-      <!-- <t-input
-        borderless="{{true}}"
-        bind:change="curlChange"
-        bind:clear="clearCurl"
-        clearable placeholder=""
-        style="border: 2rpx solid rgba(220,220,220,1);border-radius: 12rpx;"
-      /> -->
     </view>
   </view>
   <view class="view-wrap">
@@ -67,9 +60,21 @@
   <view class="view-response">
     <t-tabs defaultValue="body" space-evenly="{{false}}" >
       <t-tab-panel label="Body" value="body" >
-        <textarea class="textarea">
-          {{ resForm.body }}
+        <textarea class="textarea" value="{{ resForm.body }}" placeholder="粘贴你的 JSON 数组到这里" rows="8" maxlength="-1"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-text="{{ resForm.body }}" bind:input="changeBodyRes">
         </textarea>
+         <!-- 下载, 导出 -->
+        <view class="view-export">
+          <t-button theme="primary" size="extra-small" bind:tap="toExportExcel">导出excel</t-button>
+        </view>
+        <!-- 数据表格 -->
+        <table
+            scroll="{{ scroll }}"
+            columns="{{ resForm.bodyColumns }}"
+            dataSource="{{ resForm.bodyDataSource || [] }}"
+            generic:tdBody="tdBody"
+        >
+      </table>
       </t-tab-panel>
       <t-tab-panel label="Header" value="header" >
         <table
@@ -82,10 +87,7 @@
       </t-tab-panel>
     </t-tabs>
   </view>
-  <!-- 下载, 导出 -->
-  <view class="view-export">
-    <t-button theme="primary" size="extra-small" bind:tap="toExportExcel">导出excel</t-button>
-  </view>
+
 
   <t-picker
     visible="{{visible}}"
