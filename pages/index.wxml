@@ -1,0 +1,32 @@
+<view class="manage">
+    <view wx:if="{{ currTab === 'home'}}">
+        <t-swiper
+            class="scale-card-theme"
+            current="{{current}}"
+            autoplay="{{autoplay}}"
+            duration="{{duration}}"
+            interval="{{interval}}"
+            bindchange="onSwiper"
+            navigation="{{ { type: 'dots' } }}"
+            list="{{swiperList}}"
+            image-props="{{ { shape: 'round' } }}"
+            previousMargin="34px"
+            nextMargin="34px"
+            t-class-nav="card-theme-nav"
+            t-class-prev-image="scale-candidate"
+            t-class-next-image="scale-candidate"
+        />
+        <view class="sub-app">
+            <sub-app />
+        </view>
+    </view>
+    <view wx:if="{{ currTab === 'app'}}">
+        <!-- <home></home> -->
+    </view>
+    <view wx:if="{{ currTab === 'user'}}">
+        user
+    </view>
+    <t-tab-bar value="{{currTab}}" bindchange="onTabs" theme="tag" split="{{false}}">
+        <t-tab-bar-item wx:for="{{list}}" wx:key="index" value="{{item.value}}"> {{item.label}} </t-tab-bar-item>
+    </t-tab-bar>
+</view>

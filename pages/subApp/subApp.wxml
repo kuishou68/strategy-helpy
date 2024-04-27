@@ -1,0 +1,5 @@
+<view class="sub-app">
+    <t-grid class="block" column="{{4}}" theme="card">
+        <t-grid-item text="{{item.text}}" image="{{item.imgUrl}}" wx:for="{{appList}}" wx:key="index" data-item="{{item}}" bindtap="onClickItem" />
+    </t-grid>
+</view>

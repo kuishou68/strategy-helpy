@@ -1,4 +1,3 @@
-// pages/subPackages/home/empPerformance/tdBody/tdBody.js
 Component({
     properties: {
         item: {

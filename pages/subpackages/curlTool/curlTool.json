@@ -1,0 +1,19 @@
+{
+    "usingComponents": {
+      "t-input": "tdesign-miniprogram/input/input",
+      "t-cell": "tdesign-miniprogram/cell/cell",
+      "t-picker": "tdesign-miniprogram/picker/picker",
+      "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
+      "t-tabs": "tdesign-miniprogram/tabs/tabs",
+      "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+      "t-textarea": "tdesign-miniprogram/textarea/textarea",
+      "table": "../../../components/table/table",
+      "tdBody": "../../../components/tdBody/tdBody",
+      "pull-down-list": "../../../components/pull-down-list/index"
+    },
+    "navigationBarTitleText": "curl解析工具",
+    "navigationBarBackgroundColor": "#f6f6f6",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f6f6"
+  }
+  
